@@ -6,10 +6,10 @@ var x_domain: ChartAxisDomain
 var y_domain: ChartAxisDomain
 
 func _init(function: Function) -> void:
-    self.function = function
+	self.function = function
 
 func _ready() -> void:
-    set_process_input(get_chart_properties().interactive)
+	set_process_input(get_chart_properties().interactive)
 
 func update_values(x_domain: ChartAxisDomain, y_domain: ChartAxisDomain) -> void:
 	self.visible = self.function.get_visibility()
@@ -20,13 +20,13 @@ func update_values(x_domain: ChartAxisDomain, y_domain: ChartAxisDomain) -> void
 	queue_redraw()
 
 func _draw() -> void:
-    return
+	return
 
 func get_box() -> Rect2:
-    return get_parent().get_parent().get_plot_box()
+	return get_parent().get_parent().get_plot_box()
 
 func get_chart_properties() -> ChartProperties:
-    return get_parent().get_parent().chart_properties
+	return get_parent().get_parent().chart_properties
 
 func get_relative_position(position: Vector2) -> Vector2:
-    return position - global_position
+	return position - global_position
