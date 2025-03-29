@@ -5,6 +5,19 @@ var function: Function
 var x_domain: ChartAxisDomain
 var y_domain: ChartAxisDomain
 
+static func create_for_function(function: Function) -> FunctionPlotter:
+	match function.get_type():
+		Function.Type.LINE:
+			return LinePlotter.new(function)
+		Function.Type.AREA:
+			return AreaPlotter.new(function)
+		Function.Type.PIE:
+			return PiePlotter.new(function)
+		Function.Type.BAR:
+			return BarPlotter.new(function)
+		Function.Type.SCATTER, _:
+			return ScatterPlotter.new(function)
+
 func _init(function: Function) -> void:
 	self.function = function
 
