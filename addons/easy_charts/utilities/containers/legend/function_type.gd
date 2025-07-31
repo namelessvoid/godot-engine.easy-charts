@@ -4,15 +4,24 @@ class_name FunctionTypeLabel
 var type: int
 var marker: int
 var color: Color
+var indicator_visible: bool:
+	get:
+		return indicator_visible
+	set(value):
+		indicator_visible = value
+		queue_redraw()
 
 func _draw() -> void:
+	if !indicator_visible:
+		return
+
 	var center: Vector2 = get_rect().get_center()
-	
+
 	match self.type:
 		Function.Type.LINE:
 			draw_line(
-				Vector2(get_rect().position.x, center.y), 
-				Vector2(get_rect().end.x, center.y), 
+				Vector2(get_rect().position.x, center.y),
+				Vector2(get_rect().end.x, center.y),
 				color, 3
 			)
 		Function.Type.AREA:
@@ -20,15 +29,15 @@ func _draw() -> void:
 			color_light.a = 0.3
 			draw_rect(
 				Rect2(
-					Vector2(get_rect().position.x, center.y), 
+					Vector2(get_rect().position.x, center.y),
 					Vector2(get_rect().end.x, get_rect().end.y / 2)
 				),
 				color_light,
 				3
 			)
 			draw_line(
-				Vector2(get_rect().position.x, center.y), 
-				Vector2(get_rect().end.x, center.y), 
+				Vector2(get_rect().position.x, center.y),
+				Vector2(get_rect().end.x, center.y),
 				color,
 				3
 			)
@@ -41,7 +50,7 @@ func _draw() -> void:
 		Function.Type.BAR:
 			draw_rect(
 				Rect2(
-					Vector2(get_rect().position), 
+					Vector2(get_rect().position),
 					Vector2(get_rect().end.x, get_rect().end.y)
 				),
 				color,
@@ -49,7 +58,6 @@ func _draw() -> void:
 			)
 		Function.Type.SCATTER, _:
 			pass
-	
 	match self.marker:
 		Function.Marker.NONE:
 			pass
